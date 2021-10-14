@@ -116,6 +116,9 @@ find_package(OpenMP REQUIRED)
 target_sources(
 	${TargetStringLibrary}
 	PRIVATE
+		ints.cpp
+		strings.cpp
+	
 		# tfm namespace
 		# -- heaers
 		test_for_mac.hpp
