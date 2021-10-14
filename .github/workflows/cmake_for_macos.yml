@@ -6,7 +6,7 @@ on:
   
 env:
   # the directory of the library's source code (and which contains the CMakeLists.txt)
-  TFM_DIR: /home/runner/work/test-for-mac/test-for-mac/tfm
+  TFM_DIR: tfm
   # directories of the different builds
   REL_DIR: ${{github.workspace}}/macos-build-release
   DEB_DIR: ${{github.workspace}}/macos-build-debug
