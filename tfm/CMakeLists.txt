@@ -111,6 +111,9 @@ else()
 	message(FATAL_ERROR "Error: gmp library not found")
 endif()
 
+message(STATUS "C   compiler is ${CMAKE_C_COMPILER}")
+message(STATUS "C++ compiler is ${CMAKE_CXX_COMPILER}")
+
 # ******
 # OpenMP
 # Find OpenMP
