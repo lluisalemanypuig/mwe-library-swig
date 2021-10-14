@@ -18,8 +18,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Install basic libraries that should already be there
-      run: brew install libomp
+    #- name: Install basic libraries that should already be there
+    #  run: brew install libomp
     
     - name: Configure CMake on MacOS
       run: ls -R /usr/local/opt/llvm/ ;
