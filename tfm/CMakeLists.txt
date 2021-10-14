@@ -99,11 +99,12 @@ set_target_properties(${TargetStringLibrary} PROPERTIES SOVERSION 1)
 set_target_properties(${TargetStringLibrary} PROPERTIES LINKER_LANGUAGE CXX)
 
 # **********************************************************************
-# LIBRARIES
-# check if libraries are installed in the system
+# EXTERNAL LIBRARIES
+# check if required external libraries are installed in the system
 
 # ***
 # GMP
+
 find_library(GMP_LIB gmp)
 if (GMP_LIB)
 	message(STATUS "Found gmp: ${GMP_LIB}")
@@ -116,7 +117,7 @@ message(STATUS "C++ compiler is ${CMAKE_CXX_COMPILER}")
 
 # ******
 # OpenMP
-# Find OpenMP
+
 if(APPLE)
 	if(CMAKE_C_COMPILER_ID MATCHES "Clang")
 		set(OpenMP_C "${CMAKE_C_COMPILER}")
@@ -164,7 +165,7 @@ set(LIBTFM_MAIN_HEADER
 )
 
 # **********************************************************************
-# INSTALLATION OF LIBRARY
+# INSTALLATION DIRECTORIES OF THE LIBRARY
 
 message("-- TFM binaries will be installed in: ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
 message("-- TFM headers  will be installed in: ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/tfm")
@@ -204,6 +205,7 @@ add_comp_flag(-Wrestrict)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 
 # Optimisation flags
+message(STATUS "Adding optimisation flags")
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
 	add_debug_flag(-O3)
 	add_debug_flag(-DDEBUG)
@@ -218,4 +220,10 @@ endif()
 # include path (required by the compiler to find the headers)
 target_include_directories(${TargetStringLibrary} PRIVATE ..)
 
+# **********************************************************************
+# LINKAGE TO EXTERNAL LIBRARIES
+
+message(STATUS "Target String Library: ${TargetStringLibrary}")
+message(STATUS "${gmp}")
+message(STATUS "${GMP_LIB}")
 target_link_libraries(${TargetStringLibrary} gmp)
