@@ -11,8 +11,8 @@ env:
   REL_DIR: ${{github.workspace}}/macos-build-release
   DEB_DIR: ${{github.workspace}}/macos-build-debug
   # compilers
-  COMP_C: /usr/local/opt/llvm/bin/clang
-  COMP_CXX: /usr/local/opt/llvm/bin/clang++
+  C: /usr/local/opt/llvm/bin/clang
+  CXX: /usr/local/opt/llvm/bin/clang++
   
 jobs:
   macos_build:
@@ -22,8 +22,8 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Configure CMake on MacOS
-      run: cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{COMP_C}} -DCMAKE_CXX_COMPILER=${{COMP_CXX}} ;
-           cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=${{COMP_C}} -DCMAKE_CXX_COMPILER=${{COMP_CXX}}
+      run: cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}} ;
+           cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}}
 
     - name: Build on MacOS
       run: cmake --build ${{env.REL_DIR}} --config Release -j4;
