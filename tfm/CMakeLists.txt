@@ -1,5 +1,19 @@
 cmake_minimum_required(VERSION 3.10.2)
 
+# **********************************************************************
+
+# PROJECT NAME AND VERSION
+
+# project's version
+set(TFM_MAJOR 99.99)
+set(TFM_PATCH 99)
+
+# project declaration
+project(TFM VERSION "${TFM_MAJOR}.${TFM_PATCH}")
+project(TFM DESCRIPTION "Linear Arrangement Library")
+
+# **********************************************************************
+
 # needed includes to make CMake work
 include(CheckCXXCompilerFlag)
 # installation directories (platform dependent)
@@ -75,14 +89,6 @@ endif()
 
 # **********************************************************************
 # **********************************************************************
-
-# project's version
-set(TFM_MAJOR 99.99)
-set(TFM_PATCH 99)
-
-# project declaration
-project(TFM VERSION "${TFM_MAJOR}.${TFM_PATCH}")
-project(TFM DESCRIPTION "Linear Arrangement Library")
 
 # declare library
 add_library(${TargetStringLibrary} SHARED "")
