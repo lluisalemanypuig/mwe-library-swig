@@ -9,6 +9,7 @@ std::string return_goodbye_world() noexcept;
 
 int return_0() noexcept;
 
-int uses_omp() noexcept;
+uint64_t uses_omp() noexcept;
+uint64_t not_uses_omp() noexcept;
 
 } // -- namespace tfm

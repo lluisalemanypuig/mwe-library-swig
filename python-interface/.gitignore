@@ -2,3 +2,4 @@ __pycache__
 tfmdebug.py
 tfmdebug.cxx
 tfmdebug.o
+_tfmdebug.so
