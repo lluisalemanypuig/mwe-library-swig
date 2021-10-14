@@ -23,8 +23,8 @@ jobs:
            cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug
 
     - name: Build on MacOS
-      run: cmake --build ${{env.REL_DIR}} --config Release -j4 ;
-           cmake --build ${{env.DEB_DIR}} --config Debug -j4
+      run: cmake --build ${{env.REL_DIR}} --config Release -j4 VERBOSE=1;
+           cmake --build ${{env.DEB_DIR}} --config Debug -j4 VERBOSE=1
 
     - uses: actions/upload-artifact@v2
       with:
