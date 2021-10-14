@@ -18,6 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
+    - name: Install basic libraries that should already be there
+      run: sudo brew install llvm libomp
+    
     - name: Configure CMake on MacOS
       run: cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release ;
            cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug
