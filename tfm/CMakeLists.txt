@@ -223,11 +223,8 @@ target_include_directories(${TargetStringLibrary} PRIVATE ..)
 # **********************************************************************
 # LINKAGE TO EXTERNAL LIBRARIES
 
-message(STATUS "Target String Library: ${TargetStringLibrary}")
-message(STATUS "${gmp}")
-message(STATUS "${GMP_LIB}")
 if (APPLE)
-	set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-L /usr/local/lib -lgmp")
+	target_link_libraries(${TargetStringLibrary} gmp)
 else()
 	target_link_libraries(${TargetStringLibrary} gmp)
 endif()
