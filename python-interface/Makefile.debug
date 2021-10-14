@@ -1,10 +1,12 @@
 all: _tfmdebug.so tfmdebug.py tfmdebug.cxx
 
+CXX = /usr/local/Cellar/gcc/11.2.0/bin/g++-11
+
 _tfmdebug.so: tfmdebug.o
-	g++ -D_GLIBCXX_DEBUG -DDEBUG -O3 -fPIC -shared -o _tfmdebug.so tfmdebug.o -L../tfm-debug -ltfmdebug -I ../ -I /usr/include/python3.8
+	$(CXX) -D_GLIBCXX_DEBUG -DDEBUG -O3 -fPIC -shared -o _tfmdebug.so tfmdebug.o -L /Users/sonia/opt/anaconda3/lib/ -lpython3.8 -L../tfm-debug -ltfmdebug -flat_namespace -fopenmp
 
 tfmdebug.o: tfmdebug.cxx
-	g++ -D_GLIBCXX_DEBUG -DDEBUG -O3 -fPIC -o tfmdebug.o -c tfmdebug.cxx -I ../ -I /usr/include/python3.8
+	$(CXX) -D_GLIBCXX_DEBUG -DDEBUG -O3 -fPIC -o tfmdebug.o -c tfmdebug.cxx -I ../ -I /Users/sonia/opt/anaconda3/include/python3.8/ -fopenmp
 
 tfmdebug.cxx: tfmdebug.i ../tfm/test_for_mac.hpp
 	swig -Wall -c++ -python -py3 -o tfmdebug.cxx tfmdebug.i
