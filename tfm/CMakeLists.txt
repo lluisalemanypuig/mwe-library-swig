@@ -10,7 +10,7 @@ set(TFM_PATCH 99)
 
 # project declaration
 project(TFM VERSION "${TFM_MAJOR}.${TFM_PATCH}")
-project(TFM DESCRIPTION "Linear Arrangement Library")
+project(TFM DESCRIPTION "Test Library for MacOS")
 
 # **********************************************************************
 
