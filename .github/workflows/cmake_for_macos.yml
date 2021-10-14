@@ -19,11 +19,11 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - name: Download library
-      uses: actions/checkout@v2
+    #- name: Download library
+    #  uses: actions/checkout@v2
     
     - name: Run list
-      run: ls /usr/local/Cellar
+      run: ls /usr/local/Cellar/gcc
     
     #- name: Configure CMake on MacOS
     #  run: cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}} #;
