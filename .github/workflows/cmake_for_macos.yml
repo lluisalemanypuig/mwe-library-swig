@@ -13,16 +13,17 @@ env:
   
 jobs:
   ubuntu_build:
-    runs-on: macos-11
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
     
     - name: Configure CMake on MacOS
-      run: cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release ;
+      run: ls ;
+           cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release ;
            cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug
 
-    - name: Build on Ubuntu
+    - name: Build on MacOS
       run: cmake --build ${{env.REL_DIR}} --config Release -j4 ;
            cmake --build ${{env.DEB_DIR}} --config Debug -j4
 
