@@ -1,0 +1,17 @@
+all: _tfmdebug.so tfmdebug.py tfmdebug.cxx
+
+_tfmdebug.so: tfmdebug.o
+	g++ -D_GLIBCXX_DEBUG -DDEBUG -O3 -fPIC -shared -o _tfmdebug.so tfmdebug.o -L../tfm-debug -ltfmdebug -I ../ -I /usr/include/python3.8
+
+tfmdebug.o: tfmdebug.cxx
+	g++ -D_GLIBCXX_DEBUG -DDEBUG -O3 -fPIC -o tfmdebug.o -c tfmdebug.cxx -I ../ -I /usr/include/python3.8
+
+tfmdebug.cxx: tfmdebug.i ../tfm/test_for_mac.hpp
+	swig -Wall -c++ -python -py3 -o tfmdebug.cxx tfmdebug.i
+
+clean:
+	rm -f tfmdebug.py
+	rm -f tfmdebug.o
+	rm -f _tfmdebug.so
+	rm -f tfmdebug.cxx
+	rm -rf __pycache__
