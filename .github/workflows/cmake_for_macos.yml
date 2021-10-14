@@ -10,6 +10,7 @@ env:
   # directories of the different builds
   REL_DIR: ${{github.workspace}}/macos-build-release
   DEB_DIR: ${{github.workspace}}/macos-build-debug
+  # compilers
   C: /usr/local/opt/llvm/bin/clang
   CXX: /usr/local/opt/llvm/bin/clang++
   
@@ -19,9 +20,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
-    #- name: Install basic libraries that should already be there
-    #  run: brew install libomp
     
     - name: Configure CMake on MacOS
       run: cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{C}} -DCMAKE_CXX_COMPILER=${{CXX}} ;
