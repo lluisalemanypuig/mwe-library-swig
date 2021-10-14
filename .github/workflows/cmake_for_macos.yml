@@ -11,8 +11,8 @@ env:
   REL_DIR: ${{github.workspace}}/macos-build-release
   DEB_DIR: ${{github.workspace}}/macos-build-debug
   # compilers
-  C: /usr/local/opt/llvm/bin/clang
-  CXX: /usr/local/opt/llvm/bin/clang++
+  C: /usr/local/Cellar/gcc/11.2.0/bin/gcc-11
+  CXX: /usr/local/Cellar/gcc/11.2.0/bin/g++-11
   
 jobs:
   macos_build:
@@ -24,7 +24,7 @@ jobs:
     
     - name: Configure CMake on MacOS
       run: cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}} #;
-           #cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}}
+          #cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}}
 
     - name: Build on MacOS
       run: cmake --build ${{env.REL_DIR}} --config Release -j4 #;
@@ -36,4 +36,4 @@ jobs:
         name: compilation-for-macos
         path: |
           ${{env.REL_DIR}}/libtfm.so*
-        #  ${{env.DEB_DIR}}/libtfmdebug.so*
+       # ${{env.DEB_DIR}}/libtfmdebug.so*
