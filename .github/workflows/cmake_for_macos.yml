@@ -12,15 +12,14 @@ env:
   DEB_DIR: ${{github.workspace}}/macos-build-debug
   
 jobs:
-  ubuntu_build:
+  macos_build:
     runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v2
     
     - name: Configure CMake on MacOS
-      run: ls ;
-           cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release ;
+      run: cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release ;
            cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug
 
     - name: Build on MacOS
