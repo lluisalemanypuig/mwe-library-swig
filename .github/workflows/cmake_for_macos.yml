@@ -22,6 +22,9 @@ jobs:
     - name: Download library
       uses: actions/checkout@v2
     
+    - name: Install libraries
+      run: brew install gmp-dev
+    
     - name: Configure CMake on MacOS
       run: cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}} ;
            cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}}
