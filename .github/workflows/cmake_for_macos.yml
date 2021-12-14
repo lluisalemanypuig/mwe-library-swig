@@ -36,4 +36,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: compilation-for-macos
-        path: ${{env.REL_DIR}}/libtfm*dylib*
+        path: ${{env.REL_DIR}}/libtfm*dylib* ; ${{env.DEB_DIR}}/libtfm*dylib*
