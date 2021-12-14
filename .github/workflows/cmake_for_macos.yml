@@ -11,8 +11,8 @@ env:
   REL_DIR: ${{github.workspace}}/macos-build-release
   DEB_DIR: ${{github.workspace}}/macos-build-debug
   # compilers
-  C: /usr/local/Cellar/gcc/11.2.0/bin/gcc-11
-  CXX: /usr/local/Cellar/gcc/11.2.0/bin/g++-11
+  C: /usr/local/Cellar/gcc/11.2.0_3/bin/gcc-11
+  CXX: /usr/local/Cellar/gcc/11.2.0_3/bin/g++-11
   
 jobs:
   macos_build:
