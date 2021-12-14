@@ -40,5 +40,5 @@ jobs:
       with:
         name: compilation-for-macos
         path: |
-          ${{env.REL_DIR}}/libtfm.so*
+          ${{env.REL_DIR}}/libtfm*dylib*
        # ${{env.DEB_DIR}}/libtfmdebug.so*
