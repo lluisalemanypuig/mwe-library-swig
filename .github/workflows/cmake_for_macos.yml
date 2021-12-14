@@ -24,16 +24,13 @@ jobs:
 
     - name: Configure CMake on MacOS
       run: |
-        echo "env.TFM_DIR: ${{env.TFM_DIR}}" ;
-        echo "env.REL_DIR: ${{env.REL_DIR}}" ;
-        cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}} #;
-        #cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}}
+        cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}} |
+        cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug   -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}}
 
     - name: Build on MacOS
       run: |
-        cmake --build ${{env.REL_DIR}} --config Release -j4 ;
-        ls ${{env.REL_DIR}}
-        #cmake --build ${{env.DEB_DIR}} --config Debug -j4
+        cmake --build ${{env.REL_DIR}} --config Release -j4 |
+        cmake --build ${{env.DEB_DIR}} --config Debug   -j4
 
     - name: Upload compiled library
       uses: actions/upload-artifact@v2
@@ -41,4 +38,3 @@ jobs:
         name: compilation-for-macos
         path: |
           ${{env.REL_DIR}}/libtfm*dylib*
-       # ${{env.DEB_DIR}}/libtfmdebug.so*
