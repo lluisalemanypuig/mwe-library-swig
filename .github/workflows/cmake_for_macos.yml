@@ -22,9 +22,6 @@ jobs:
     - name: Download library
       uses: actions/checkout@v2
 
-    - name: Update stupid xcode
-      run: xcode-select --install 
-    
     - name: Spy!
       run: ls -R /usr/local/Cellar/
     
