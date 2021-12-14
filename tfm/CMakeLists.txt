@@ -119,11 +119,22 @@ message(STATUS "C++ compiler is ${CMAKE_CXX_COMPILER}")
 # OpenMP
 
 if(APPLE)
-	message(STATUS "Mac OS detected")
-	message(STATUS "Ditch gmp path found by CMake ${GMP_LIB}")
-	# assume that GNU's gcc is used...
-	export LD_LIBRARY_PATH=/usr/local/Cellar/gmp/6.2.1_1/lib:$LD_LIBRARY_PATH
-	export CPLUS_INCLUDE_PATH=/usr/local/Cellar/gmp/6.2.1_1/include:$CPLUS_INCLUDE_PATH
+	if(CMAKE_C_COMPILER_ID MATCHES "Clang")
+		set(OpenMP_C "${CMAKE_C_COMPILER}")
+		set(OpenMP_C_FLAGS "-fopenmp=libomp -Wno-unused-command-line-argument")
+		set(OpenMP_C_LIB_NAMES "libomp" "libgomp" "libiomp5")
+		set(OpenMP_libomp_LIBRARY ${OpenMP_C_LIB_NAMES})
+		set(OpenMP_libgomp_LIBRARY ${OpenMP_C_LIB_NAMES})
+		set(OpenMP_libiomp5_LIBRARY ${OpenMP_C_LIB_NAMES})
+	endif()
+	if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+		set(OpenMP_CXX "${CMAKE_CXX_COMPILER}")
+		set(OpenMP_CXX_FLAGS "-fopenmp=libomp -Wno-unused-command-line-argument")
+		set(OpenMP_CXX_LIB_NAMES "libomp" "libgomp" "libiomp5")
+		set(OpenMP_libomp_LIBRARY ${OpenMP_CXX_LIB_NAMES})
+		set(OpenMP_libgomp_LIBRARY ${OpenMP_CXX_LIB_NAMES})
+		set(OpenMP_libiomp5_LIBRARY ${OpenMP_CXX_LIB_NAMES})
+	endif()
 endif()
 
 find_package(OpenMP REQUIRED)
@@ -213,7 +224,12 @@ target_include_directories(${TargetStringLibrary} PRIVATE ..)
 # LINKAGE TO EXTERNAL LIBRARIES
 
 if (APPLE)
-	target_link_libraries(${TargetStringLibrary} gmp)
+	message(STATUS "Mac OS detected")
+	message(STATUS "Ditch gmp path found by CMake ${GMP_LIB}")
+	# assume that GNU's gcc is used...
+	
+	SET(LD_LIBRARY_PATH "${LD_LIBRARY_PATH} /usr/local/Cellar/gmp/6.2.1_1/lib")
+	SET(CPLUS_INCLUDE_PATH "${CPLUS_INCLUDE_PATH} /usr/local/Cellar/gmp/6.2.1_1/include")
 else()
 	target_link_libraries(${TargetStringLibrary} gmp)
 endif()
