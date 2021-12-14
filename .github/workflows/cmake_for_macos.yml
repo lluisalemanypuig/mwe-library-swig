@@ -21,6 +21,12 @@ jobs:
     steps:
     - name: Download library
       uses: actions/checkout@v2
+
+    - name: Update stupid xcode
+      run: xcode-select --install 
+    
+    - name: Spy!
+      run: ls -R /usr/local/Cellar/
     
     - name: Configure CMake on MacOS
       run: cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}} #;
