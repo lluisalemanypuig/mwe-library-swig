@@ -30,7 +30,7 @@ jobs:
         #cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}}
 
     - name: Build on MacOS
-      run: cmake --build ${{env.REL_DIR}} --config Release -j4 #;
+      run: cmake --build ${{env.REL_DIR}} --config Release VERBOSE=1 -j4 #;
            #cmake --build ${{env.DEB_DIR}} --config Debug -j4
 
     - name: Upload compiled library
