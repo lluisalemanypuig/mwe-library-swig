@@ -32,8 +32,14 @@ jobs:
         cmake --build ${{env.REL_DIR}} --config Release -j4 ;
         cmake --build ${{env.DEB_DIR}} --config Debug   -j4
 
-    - name: Upload compiled library
+    - name: Upload release build of the library
       uses: actions/upload-artifact@v2
       with:
-        name: compilation-for-macos
-        path: ${{env.REL_DIR}}/libtfm*dylib* ; ${{env.DEB_DIR}}/libtfm*dylib*
+        name: release-build-macos
+        path: ${{env.REL_DIR}}/libtfm*dylib*
+    
+    - name: Upload debug build of the library
+      uses: actions/upload-artifact@v2
+      with:
+        name: debug-build-macos
+        path: ${{env.DEB_DIR}}/libtfm*dylib*
