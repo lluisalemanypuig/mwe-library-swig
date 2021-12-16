@@ -6,7 +6,7 @@ on:
   
 env:
   # the directory of the library's source code (and which contains the CMakeLists.txt)
-  TFM_DIR: /Users/runner/work/test-for-mac/test-for-mac/tfm
+  MWE_DIR: /Users/runner/work/mwe-library-swig/mwe-library-swig/mwe
   # directories of the different builds
   REL_DIR: ${{github.workspace}}/macos-build-release
   DEB_DIR: ${{github.workspace}}/macos-build-debug
@@ -24,8 +24,8 @@ jobs:
 
     - name: Configure CMake on MacOS
       run: |
-        cmake ${{env.TFM_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}} ;
-        cmake ${{env.TFM_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug   -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}}
+        cmake ${{env.MWE_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}} ;
+        cmake ${{env.MWE_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug   -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}}
 
     - name: Build on MacOS
       run: |
