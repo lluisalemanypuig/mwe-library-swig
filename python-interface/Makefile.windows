@@ -2,6 +2,8 @@ ifeq ($(BUILD), )
 	BUILD = release
 endif
 
+USE_ANACONDA=Yes
+
 FLAGS = -std=c++17 -Wall -Wconversion -Wpedantic
 ifeq ($(BUILD), debug)
 	# debug build
@@ -39,8 +41,14 @@ MWE_INCLUDE = -I ../
 LIBS += $(MWE_LIB)
 LIBS += -lgmp -fopenmp
 
-PYTHON_LIB = -lpython3.9
-PYTHON_INCLUDE = -I /mingw64/include/python3.9
+ifeq ($(USE_ANACONDA),Yes)
+	ANACONDA=C:/Users/lluis/anaconda3
+	PYTHON_LIB = $(ANACONDA)/python3.dll $(ANACONDA)/python39.dll
+	PYTHON_INCLUDE = -I $(ANACONDA)/include
+else
+	PYTHON_LIB = -lpython3.9
+	PYTHON_INCLUDE = -I /mingw64/include/python3.9
+endif
 
 CXX = g++
 
