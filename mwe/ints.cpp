@@ -1,8 +1,8 @@
-#include <tfm/test_for_mac.hpp>
+#include <mwe/mwe.hpp>
 
 #include <omp.h>
 
-namespace tfm {
+namespace mwe {
 
 int return_0() noexcept { return 0; }
 

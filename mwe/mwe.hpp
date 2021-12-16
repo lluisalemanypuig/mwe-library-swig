@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace tfm {
+namespace mwe {
 
 std::string return_hello_world() noexcept;
 std::string return_goodbye_world() noexcept;

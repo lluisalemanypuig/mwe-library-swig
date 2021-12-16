@@ -1,5 +1,13 @@
 __pycache__
-tfmdebug.py
-tfmdebug.cxx
-tfmdebug.o
-_tfmdebug.so
+
+mwedebug.py
+mwedebug.cxx
+mwedebug.o
+_mwedebug.so
+_mwedebug.pyd
+
+mwe.py
+mwe.cxx
+mwe.o
+_mwe.so
+_mwe.pyd

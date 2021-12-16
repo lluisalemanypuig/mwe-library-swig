@@ -1,0 +1,63 @@
+ifeq ($(BUILD), )
+	BUILD = release
+endif
+
+FLAGS = -std=c++17 -Wall -Wconversion -Wpedantic
+ifeq ($(BUILD), debug)
+	# debug build
+	FLAGS += -g -O3 -DDEBUG -D_GLIBCXX_DEBUG
+	
+	MWE_SO = _mwedebug.pyd
+	MWE_LIB_DIR = ../mwe-debug
+	MWE_LIB = -L $(MWE_LIB_DIR) -lmwedebug
+	
+	SWIG_FILE = mwedebug.i
+	
+	CXX_FILE = mwedebug.cxx
+	O_FILE = mwedebug.o
+	
+	PYTHON_INTERFACE_FILE = mwedebug.py
+	
+else ifeq ($(BUILD), release)
+	# release build
+	FLAGS += -O3 -DNDEBUG -UDEBUG
+	
+	MWE_SO = _mwe.pyd
+	MWE_LIB = -L ../mwe-release -lmwe
+	
+	LIB_PREFIX = mwe
+	SWIG_FILE = mwe.i
+	
+	CXX_FILE = mwe.cxx
+	O_FILE = mwe.o
+	
+	PYTHON_INTERFACE_FILE = mwe.py
+endif
+
+MWE_INCLUDE = -I ../
+
+LIBS += $(MWE_LIB)
+LIBS += -lgmp -fopenmp
+
+PYTHON_LIB = -lpython3.9
+PYTHON_INCLUDE = -I /mingw64/include/python3.9
+
+CXX = g++
+
+all: $(MWE_SO) $(PYTHON_INTERFACE_FILE) $(CXX_FILE)
+
+$(MWE_SO): $(O_FILE)
+	$(CXX) $(FLAGS) -shared -o $(MWE_SO) $(O_FILE) $(LIBS) $(PYTHON_LIB)
+
+$(O_FILE): $(CXX_FILE)
+	$(CXX) $(FLAGS) -o $(O_FILE) -c $(CXX_FILE) $(MWE_INCLUDE) $(PYTHON_INCLUDE) -fopenmp
+
+$(CXX_FILE): $(SWIG_FILE) ../mwe/mwe.hpp
+	swig -Wall -c++ -python -py3 -o $(CXX_FILE) $(SWIG_FILE)
+
+clean:
+	rm -f $(PYTHON_INTERFACE_FILE)
+	rm -f $(O_FILE)
+	rm -f $(MWE_SO)
+	rm -f $(CXX_FILE)
+	rm -rf __pycache__

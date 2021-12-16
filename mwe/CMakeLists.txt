@@ -5,12 +5,12 @@ cmake_minimum_required(VERSION 3.10.2)
 # PROJECT NAME AND VERSION
 
 # project's version
-set(TFM_MAJOR 99.99)
-set(TFM_PATCH 99)
+set(MWE_MAJOR 99.99)
+set(MWE_PATCH 99)
 
 # project declaration
-project(TFM VERSION "${TFM_MAJOR}.${TFM_PATCH}")
-project(TFM DESCRIPTION "Test Library for MacOS")
+project(MWE VERSION "${MWE_MAJOR}.${MWE_PATCH}")
+project(MWE DESCRIPTION "Test Library for MacOS")
 
 # **********************************************************************
 
@@ -80,11 +80,11 @@ endif()
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
-	message(STATUS "Target library tfmdebug")
-	set(TargetStringLibrary "tfmdebug")
+	message(STATUS "Target library mwedebug")
+	set(TargetStringLibrary "mwedebug")
 else()
-	message(STATUS "Target library tfm")
-	set(TargetStringLibrary "tfm")
+	message(STATUS "Target library mwe")
+	set(TargetStringLibrary "mwe")
 endif()
 
 # **********************************************************************
@@ -94,7 +94,7 @@ endif()
 add_library(${TargetStringLibrary} SHARED "")
 
 # define library's properties
-set_target_properties(${TargetStringLibrary} PROPERTIES VERSION "${TFM_MAJOR}.${TFM_PATCH}")
+set_target_properties(${TargetStringLibrary} PROPERTIES VERSION "${MWE_MAJOR}.${MWE_PATCH}")
 set_target_properties(${TargetStringLibrary} PROPERTIES SOVERSION 1)
 set_target_properties(${TargetStringLibrary} PROPERTIES LINKER_LANGUAGE CXX)
 
@@ -151,7 +151,7 @@ target_sources(
 	
 		# tfm namespace
 		# -- heaers
-		test_for_mac.hpp
+		mwe.hpp
 )
 
 # **********************************************************************
@@ -160,21 +160,21 @@ target_sources(
 # Public header files of the library (to be installed in the system).
 # These are not installed through the usual PUBLIC_HEADER property,
 # but via several custom variables
-set(LIBTFM_MAIN_HEADER
-	test_for_mac.hpp
+set(LIBMWE_MAIN_HEADER
+	mwe.hpp
 )
 
 # **********************************************************************
 # INSTALLATION DIRECTORIES OF THE LIBRARY
 
-message("-- TFM binaries will be installed in: ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
-message("-- TFM headers  will be installed in: ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/tfm")
+message("-- MWE binaries will be installed in: ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+message("-- MWE headers  will be installed in: ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/tfm")
 
 install(
 	TARGETS ${TargetStringLibrary}
 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
-install(FILES ${LIBTFM_MAIN_HEADER}			DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tfm)
+install(FILES ${LIBMWE_MAIN_HEADER}			DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/tfm)
 
 # **********************************************************************
 # COMPILATION FLAGS
