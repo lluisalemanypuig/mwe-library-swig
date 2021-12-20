@@ -35,11 +35,11 @@ jobs:
     - name: Upload release build of the library
       uses: actions/upload-artifact@v2
       with:
-        name: release-build-macos
-        path: ${{env.REL_DIR}}/libtfm*dylib*
+        name: release-build-macos-11
+        path: ${{env.REL_DIR}}/libmwe*dylib*
     
     - name: Upload debug build of the library
       uses: actions/upload-artifact@v2
       with:
-        name: debug-build-macos
-        path: ${{env.DEB_DIR}}/libtfm*dylib*
+        name: debug-build-macos-11
+        path: ${{env.DEB_DIR}}/libmwe*dylib*
