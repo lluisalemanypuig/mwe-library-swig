@@ -1,4 +1,4 @@
-name: CMake for MacOS
+name: Compile C++ library for MacOS
 
 on:
   push:
@@ -16,7 +16,7 @@ env:
   
 jobs:
   macos_build:
-    runs-on: macos-latest
+    runs-on: macos-11
 
     steps:
     - name: Download library
