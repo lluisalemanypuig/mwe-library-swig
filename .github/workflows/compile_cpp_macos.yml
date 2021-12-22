@@ -15,8 +15,37 @@ env:
   CXX: g++-11
   
 jobs:
-  macos_build:
+  macos_10_build:
     runs-on: macos-10.15
+
+    steps:
+    - name: Download library
+      uses: actions/checkout@v2
+
+    - name: Configure CMake on MacOS
+      run: |
+        cmake ${{env.MWE_DIR}} -B ${{env.REL_DIR}} -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}} ;
+        cmake ${{env.MWE_DIR}} -B ${{env.DEB_DIR}} -DCMAKE_BUILD_TYPE=Debug   -DCMAKE_C_COMPILER=${{env.C}} -DCMAKE_CXX_COMPILER=${{env.CXX}}
+
+    - name: Build on MacOS
+      run: |
+        cmake --build ${{env.REL_DIR}} --config Release -j4 ;
+        cmake --build ${{env.DEB_DIR}} --config Debug   -j4
+
+    - name: Upload release build of the library
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-build-macos-10
+        path: ${{env.REL_DIR}}/libmwe*dylib*
+    
+    - name: Upload debug build of the library
+      uses: actions/upload-artifact@v2
+      with:
+        name: debug-build-macos-10
+        path: ${{env.DEB_DIR}}/libmwe*dylib*
+  
+  macos_11_build:
+    runs-on: macos-11
 
     steps:
     - name: Download library
